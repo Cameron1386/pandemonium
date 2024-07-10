@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "889936606967",
+    "project_id": "pandemonium-dbffa",
+    "storage_bucket": "pandemonium-dbffa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889936606967:android:d08761062c23bc041a85f2",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC6rm4JN7Z3qtRcHxlOdjDceOne3Poajo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889936606967:android:ee6a1a4cf3db90e91a85f2",
+        "android_client_info": {
+          "package_name": "com.example.pandemonium"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC6rm4JN7Z3qtRcHxlOdjDceOne3Poajo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
