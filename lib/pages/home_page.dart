@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'ai_page.dart';
-import 'leaderboard_page.dart';
-import 'streaks_page.dart';
-import 'home_content.dart';
+import 'main_screens/ai_page.dart';
+import 'main_screens/leaderboard_page.dart';
+import 'main_screens/streaks_page.dart';
+import 'main_screens/home_content.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,11 +14,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
+  int currentIndex = 0;
+  void goToPage(index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  // List of pages
+  List _pages = [
+    // Home page
     HomeContent(),
+
+    //AI page
     AiPage(),
+
+    // Leaderboard page
     LeaderboardPage(),
+    
+    // Streaks page
     StreaksPage(),
   ];
 
@@ -32,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _pages[currentIndex],
       // Bottom navigation bar
       bottomNavigationBar: Container(
         color: Colors.black,
@@ -47,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             tabBackgroundColor: Colors.grey.shade800,
             gap: 8,
             padding: EdgeInsets.all(16),
+            onTabChange: (index) => goToPage(index),
             tabs: [
               GButton(
                 icon: Icons.home,
@@ -65,19 +81,12 @@ class _HomePageState extends State<HomePage> {
                 text: 'Streaks',
               ),
             ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
           ),
         ),
       ),
       
       // Background color
-      backgroundColor: Colors.deepPurple[100],
-      body: _widgetOptions.elementAt(_selectedIndex),
+      
     );
   }
 }

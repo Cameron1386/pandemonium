@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/heat_map.dart';
+import '../../components/heat_map.dart';
 
 class StreaksPage extends StatelessWidget {
   const StreaksPage({super.key});
