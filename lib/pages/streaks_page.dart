@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/heat_map.dart';
 
 class StreaksPage extends StatelessWidget {
   const StreaksPage({super.key});
@@ -9,9 +10,8 @@ class StreaksPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Streaks Page'),
       ),
-      body: const Center(
-        child: Text('Streaks Page'),
-      ),
+      backgroundColor: Colors.grey[300],
+      body: MyHeatMap(),
     );
   }
 }
