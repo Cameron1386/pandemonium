@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:pandemonium/api/firebase_api.dart';
-import 'package:pandemonium/components/consts.dart';
+import 'package:pandemonium/api/consts.dart';
 import 'package:pandemonium/pages/intro_screens/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

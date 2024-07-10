@@ -4,6 +4,8 @@ import 'package:pandemonium/components/my_button.dart';
 import 'package:pandemonium/components/my_textfield.dart';
 import 'package:pandemonium/components/square_tile.dart';
 
+import '../../services/auth_services.dart';
+
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
   const LoginPage({super.key, required this.onTap});
@@ -176,16 +178,22 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
 
                 // google + apple sign in buttons
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    SquareTile(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'lib/images/google.png',
+                    ),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(imagePath: 'lib/images/apple.png')
+                    SquareTile(
+                      onTap: () {},
+                      imagePath: 'lib/images/apple.png',
+                      )
                   ],
                 ),
 
