@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pandemonium/pages/dashboard/daily_level.dart';
 import 'package:pandemonium/pages/dashboard/easy_level.dart';
 import 'package:pandemonium/pages/dashboard/hard_level.dart';
+import 'package:pandemonium/pages/profile_page.dart';
 
 class HomeContent extends StatelessWidget {
   @override
@@ -12,7 +13,15 @@ class HomeContent extends StatelessWidget {
         // sliver app bar
         SliverAppBar(
           backgroundColor: Colors.deepPurple,
-          leading: Icon(Icons.person),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+            child: Icon(Icons.person),
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.logout),
