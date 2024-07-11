@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pandemonium/pages/dashboard/daily_level.dart';
+import 'package:pandemonium/pages/dashboard/easy_level.dart';
+import 'package:pandemonium/pages/dashboard/hard_level.dart';
 
 class HomeContent extends StatelessWidget {
   @override
@@ -38,11 +41,20 @@ class HomeContent extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                height: 400,
-                color: Colors.deepPurple[300],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DailyLevel()),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  child: Center(child: Text('Daily Level')),
+                  height: 400,
+                  color: Colors.deepPurple[300],
+                ),
               ),
             ),
           ),
@@ -50,11 +62,20 @@ class HomeContent extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                height: 400,
-                color: Colors.deepPurple[300],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EasyLevel()),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  child: Center(child: Text('Easy Level')),
+                  height: 400,
+                  color: Colors.deepPurple[300],
+                ),
               ),
             ),
           ),
@@ -62,11 +83,20 @@ class HomeContent extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                height: 400,
-                color: Colors.deepPurple[300],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HardLevel()),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  child: Center(child: Text('Hard Level')),
+                  height: 400,
+                  color: Colors.deepPurple[300],
+                ),
               ),
             ),
           ),
