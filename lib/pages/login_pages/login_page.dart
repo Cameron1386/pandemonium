@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pandemonium/components/my_button.dart';
 import 'package:pandemonium/components/my_textfield.dart';
 import 'package:pandemonium/components/square_tile.dart';
-
 import '../../services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {

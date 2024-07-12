@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pandemonium/components/my_button.dart';
 import 'package:pandemonium/components/my_textfield.dart';
 import 'package:pandemonium/components/square_tile.dart';
-
 import '../../services/auth_services.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -25,20 +24,13 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUserUp() async {
 
     //show loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    
 
 
     // try creating the user
     try {
       // check if password is confirmed
-      if (passwordController.text == confimPasswordController) {
+      if (passwordController.text == confimPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
@@ -48,10 +40,10 @@ class _RegisterPageState extends State<RegisterPage> {
         showErrorMessage('Passwords do not match!');
       }
       // pop the loading circle
-      Navigator.pop(context);
+
     } on FirebaseAuthException catch (e){
       //pop the loading circle
-      Navigator.pop(context);
+
       showErrorMessage(e.code);
     }
   }
@@ -153,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   onTap: signUserUp,
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // or continue with
                 Padding(
@@ -183,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // google + apple sign in buttons
                 Row(
@@ -205,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // not a member? register now
                 Row(

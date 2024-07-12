@@ -24,7 +24,10 @@ class HomeContent extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: Icon(
+                Icons.logout,
+                color: Colors.black,
+                ),
               onPressed: () {
                 FirebaseAuth.instance.signOut();
               },
