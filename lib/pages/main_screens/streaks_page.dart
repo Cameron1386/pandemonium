@@ -11,7 +11,7 @@ class StreaksPage extends StatelessWidget {
         title: const Text('Streaks Page'),
       ),
       backgroundColor: Colors.grey[300],
-      body: MyHeatMap(),
+      body: const MyHeatMap(),
     );
   }
 }

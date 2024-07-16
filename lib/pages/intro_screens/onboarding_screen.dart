@@ -15,7 +15,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   //controller to keep track of the current page
 
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
 
 
@@ -27,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           // PageView
           PageView(
             controller: _controller,
-            children: [
+            children: const [
               IntroPage1(),
               IntroPage2(),
               IntroPage3(),
@@ -36,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           // dot indicator
           Container(
-            alignment: Alignment(0, 0.75),
+            alignment: const Alignment(0, 0.75),
             child: SmoothPageIndicator(controller: _controller, count: 3)
             ),
         ],

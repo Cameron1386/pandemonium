@@ -19,20 +19,20 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
     );
   await FirebaseApi().initNotifications();  
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen(),
+      home: const OnboardingScreen(),
       navigatorKey: navigatorKey,
       routes: {
-        '/notification_screen': (context) => NotificationPage(),
+        '/notification_screen': (context) => const NotificationPage(),
       },
     );
   }

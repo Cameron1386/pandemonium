@@ -22,18 +22,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   // List of pages
-  List _pages = [
+  final List _pages = [
     // Home page
-    HomeContent(),
+    const HomeContent(),
 
     //AI page
-    AiPage(),
+    const AiPage(),
 
     // Leaderboard page
-    LeaderboardPage(),
+    const LeaderboardPage(),
     
     // Streaks page
-    StreaksPage(),
+    const StreaksPage(),
   ];
 
   final user = FirebaseAuth.instance.currentUser!;
@@ -61,9 +61,9 @@ class _HomePageState extends State<HomePage> {
             activeColor: Colors.white,
             tabBackgroundColor: Colors.grey.shade800,
             gap: 8,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onTabChange: (index) => goToPage(index),
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home,
                 text: 'Home',

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class IntroPage1 extends StatefulWidget {
-  const IntroPage1({super.key});
+class SetupPage extends StatefulWidget {
+  const SetupPage({super.key});
 
   @override
-  State<IntroPage1> createState() => _IntroPage1State();
+  State<SetupPage> createState() => _SetupPageState();
 }
 
-class _IntroPage1State extends State<IntroPage1> {
+class _SetupPageState extends State<SetupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.grey[100],
       body: Center(
         child: Column(
@@ -19,7 +20,7 @@ class _IntroPage1State extends State<IntroPage1> {
           children: [
             Lottie.asset('lib/animations/meditatingpanda.json'),
             const Text(
-              "Welcome to Pandemonium!",
+              "Welcome to Level One!",
               style: TextStyle(fontSize: 20),
             ),
           ],
@@ -28,4 +29,3 @@ class _IntroPage1State extends State<IntroPage1> {
     );
   }
 }
-

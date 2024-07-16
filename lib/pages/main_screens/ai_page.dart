@@ -35,7 +35,7 @@ class _AiPageState extends State<AiPage> {
         backgroundColor: Colors.deepPurple,
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed: () {
               // Add any action here
             },

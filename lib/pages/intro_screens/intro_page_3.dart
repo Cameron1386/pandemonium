@@ -3,6 +3,8 @@ import 'package:pandemonium/pages/login_pages/auth_page.dart';
 import 'package:lottie/lottie.dart';
 
 class IntroPage3 extends StatelessWidget {
+  const IntroPage3({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +22,7 @@ class IntroPage3 extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AuthPage()),
+                  MaterialPageRoute(builder: (context) => const AuthPage()),
                 );
               },
               child: const Text('Start Your Journey!'),

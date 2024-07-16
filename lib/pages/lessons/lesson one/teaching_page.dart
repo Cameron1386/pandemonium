@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GlobalPage extends StatelessWidget {
-  const GlobalPage({Key? key});
+class TeachingPage extends StatelessWidget {
+  const TeachingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Global Leaderboard'),
+        child: Text('Teaching Page'),
       ),
     );
   }

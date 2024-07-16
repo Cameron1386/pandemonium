@@ -35,15 +35,15 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
+        // pop the loading circle
       } else {
+        //pop the loading circle
         // show error message, passwords don't match
         showErrorMessage('Passwords do not match!');
       }
       // pop the loading circle
-
     } on FirebaseAuthException catch (e){
       //pop the loading circle
-
       showErrorMessage(e.code);
     }
   }
@@ -187,13 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       imagePath: 'lib/images/google.png',
                       ),
 
-                    SizedBox(width: 25),
-
-                    // apple button
-                    SquareTile(
-                      onTap: () {},
-                      imagePath: 'lib/images/apple.png',
-                      )
+                    
                   ],
                 ),
 

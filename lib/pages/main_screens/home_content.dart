@@ -6,6 +6,8 @@ import 'package:pandemonium/pages/dashboard/hard_level.dart';
 import 'package:pandemonium/pages/profile_page.dart';
 
 class HomeContent extends StatelessWidget {
+  const HomeContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -17,14 +19,14 @@ class HomeContent extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
               );
             },
-            child: Icon(Icons.person),
+            child: const Icon(Icons.person),
           ),
           actions: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.logout,
                 color: Colors.black,
                 ),
@@ -57,15 +59,15 @@ class HomeContent extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DailyLevel()),
+                  MaterialPageRoute(builder: (context) => const DailyLevel()),
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  child: Center(child: Text('Daily Level')),
                   height: 400,
                   color: Colors.deepPurple[300],
+                  child: const Center(child: Text('Daily Level')),
                 ),
               ),
             ),
@@ -78,15 +80,21 @@ class HomeContent extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EasyLevel()),
+                  MaterialPageRoute(
+                    builder: (context) => const Scaffold(
+                      backgroundColor: Colors.green,
+                      body:  EasyLevel(),
+                    ),
+                  ),
+
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  child: Center(child: Text('Easy Level')),
                   height: 400,
                   color: Colors.deepPurple[300],
+                  child: const Center(child: Text('Easy Level')),
                 ),
               ),
             ),
@@ -99,15 +107,15 @@ class HomeContent extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HardLevel()),
+                  MaterialPageRoute(builder: (context) => const HardLevel()),
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  child: Center(child: Text('Hard Level')),
                   height: 400,
                   color: Colors.deepPurple[300],
+                  child: const Center(child: Text('Hard Level')),
                 ),
               ),
             ),

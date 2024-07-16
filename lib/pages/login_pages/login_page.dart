@@ -23,14 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   void signUserIn() async {
 
     //show loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    
 
 
     // try sign in
@@ -40,10 +33,8 @@ class _LoginPageState extends State<LoginPage> {
       password: passwordController.text,
     );
       // pop the loading circle
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e){
       //pop the loading circle
-      Navigator.pop(context);
       showErrorMessage(e.code);
     }
   }
@@ -174,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // google + apple sign in buttons
                 Row(
