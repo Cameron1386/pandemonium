@@ -33,14 +33,7 @@ class _AiPageState extends State<AiPage> {
       appBar: AppBar(
         title: const Text('Elder Panda'),
         backgroundColor: Colors.deepPurple,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () {
-              // Add any action here
-            },
-          ),
-        ],
+        
       ),
       body: _buildChatUI(),
     );
