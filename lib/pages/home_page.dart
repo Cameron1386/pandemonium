@@ -5,7 +5,7 @@ import 'main_screens/ai_page.dart';
 import 'main_screens/leaderboard_page.dart';
 import 'main_screens/streaks_page.dart';
 import 'main_screens/home_content.dart';
-//hello test
+// THIS IF FROM CAM
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -91,4 +91,4 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// This is a comment
+// This is a comments
