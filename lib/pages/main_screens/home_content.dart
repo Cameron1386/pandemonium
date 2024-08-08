@@ -47,7 +47,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacementNamed(context, '/login');  // Ensure you have this route set up
+                  Navigator.pushReplacementNamed(context, '/login');  
                 },
               ),
             ],

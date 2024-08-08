@@ -24,7 +24,7 @@ class _AiPageState extends State<AiPage> {
   final ChatUser geminiUser = ChatUser(
     firstName: 'Elder Panda',
     id: '1',
-    profileImage: const AssetImage('lib/images/panda.png').assetName,
+    profileImage: 'https://img.freepik.com/free-vector/cute-fluffy-panda-face_1284-37906.jpg',
   );
 
   @override

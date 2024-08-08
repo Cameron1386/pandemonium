@@ -26,7 +26,7 @@ class _EasyLevelState extends State<EasyLevel> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);  // Use Navigator.pop to return to the previous screen without altering the state
+            Navigator.pop(context); 
           },
         ),
         actions: [
