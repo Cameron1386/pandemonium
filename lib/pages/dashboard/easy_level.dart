@@ -51,8 +51,8 @@ class _EasyLevelState extends State<EasyLevel> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.star, color: Colors.yellow),
                       SizedBox(width: 5),
                       Text(
@@ -72,8 +72,8 @@ class _EasyLevelState extends State<EasyLevel> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children:  [
                       Icon(Icons.star, color: Colors.yellow),
                       SizedBox(width: 5),
                       Text(
