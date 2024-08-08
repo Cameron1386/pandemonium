@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pandemonium/pages/lessons/lesson%20one/application_page.dart';
-import 'package:pandemonium/pages/lessons/lesson%20one/quiz_page.dart';
-import 'package:pandemonium/pages/lessons/lesson%20one/test_page.dart';
+import 'package:pandemonium/pages/lessons/lesson_one/application_page.dart';
+import 'package:pandemonium/pages/lessons/lesson_one/quiz_page.dart';
+import 'package:pandemonium/pages/lessons/lesson_one/test_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'setup_page.dart';
 import 'teaching_page.dart';

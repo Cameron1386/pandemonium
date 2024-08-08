@@ -43,7 +43,7 @@ class HomeContent extends StatelessWidget {
                   image: AssetImage('lib/images/panda.png'),
                   fit: BoxFit.contain,
                 ),
-                color: Colors.pink,
+                color: Colors.grey,
               ),
             ),
             centerTitle: true,
