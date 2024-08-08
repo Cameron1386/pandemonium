@@ -50,7 +50,7 @@ dependencies:
   provider:
   awesome_snackbar_content: ^0.1.3
   cloud_firestore: ^5.1.0
-  
+  google_api_availability: ^5.0.0
 
 
 dev_dependencies:
