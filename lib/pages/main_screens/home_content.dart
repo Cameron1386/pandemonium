@@ -43,7 +43,7 @@ class _HomeContentState extends State<HomeContent> {
               IconButton(
                 icon: const Icon(
                   Icons.logout,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
