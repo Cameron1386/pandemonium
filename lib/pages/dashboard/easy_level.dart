@@ -8,7 +8,7 @@ import 'package:pandemonium/models/lesson_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EasyLevel extends StatefulWidget {
-  const EasyLevel({Key? key}) : super(key: key);
+  const EasyLevel({super.key});
 
   @override
   State<EasyLevel> createState() => _EasyLevelState();
@@ -136,7 +136,7 @@ class _EasyLevelState extends State<EasyLevel> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LessonPageOne(),
+                                    builder: (context) => const LessonPageOne(),
                                   ),
                                 );
                               } else if (index == 1) {

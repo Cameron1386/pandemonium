@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class GlobalPage extends StatelessWidget {
-  const GlobalPage({Key? key}) : super(key: key);
+  const GlobalPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class GlobalPage extends StatelessWidget {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               final DocumentSnapshot user = snapshot.data!.docs[index];
-              final String? userId = user.id;
+              final String userId = user.id;
               final String? userEmail = userId != null
                   ? FirebaseAuth.instance.currentUser?.email
                   : 'Unknown';

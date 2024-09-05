@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pandemonium/pages/lessons/lesson_one/application_page.dart';
-import 'package:pandemonium/pages/lessons/lesson_one/quiz_page.dart';
-import 'package:pandemonium/pages/lessons/lesson_one/test_page.dart';
+import 'package:pandemonium/pages/lessons/lesson_one/key_concepts_page.dart';
+import 'package:pandemonium/pages/lessons/lesson_one/importance_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'setup_page.dart';
-import 'teaching_page.dart';
+import 'cyber_threats_page.dart';
+import 'key_concepts_page.dart';
+import 'cyber_threats_page.dart';
+import 'importance_page.dart';
 
 class LessonPageOne extends StatefulWidget {
   const LessonPageOne({super.key});
@@ -16,21 +19,19 @@ class LessonPageOne extends StatefulWidget {
 class _LessonPageOneState extends State<LessonPageOne> {
   final PageController _controller = PageController();
   int _currentPage = 0;
-  bool _isAnswerCorrect = false;
 
   void _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
-      _isAnswerCorrect = false;
     });
   }
 
   double _getPercentage() {
-    return (_currentPage + 1) / 5;
+    return (_currentPage + 1) / 7; // Updated for 7 pages
   }
 
   void _nextPage() {
-    if (_currentPage < 4) {
+    if (_currentPage < 6) {
       _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
     }
   }
@@ -41,12 +42,6 @@ class _LessonPageOneState extends State<LessonPageOne> {
     }
   }
 
-  void _checkAnswer(bool isCorrect) {
-    setState(() {
-      _isAnswerCorrect = isCorrect;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,13 +50,13 @@ class _LessonPageOneState extends State<LessonPageOne> {
           PageView(
             controller: _controller,
             onPageChanged: _onPageChanged,
-            physics: const NeverScrollableScrollPhysics(), // Disable swipe
-            children: [
-              const SetupPage(),
-              const TeachingPage(),
-              QuizPage(onCheckAnswer: _checkAnswer),
-              TestPage(onCheckAnswer: _checkAnswer),
-              ApplicationPage(onCheckAnswer: _checkAnswer),
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              SetupPage(),
+              KeyConceptsPage(),
+              CyberThreatsPage(),
+              ImportancePage(),
+              ApplicationPage(),
             ],
           ),
           Positioned(
@@ -70,7 +65,7 @@ class _LessonPageOneState extends State<LessonPageOne> {
             child: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
-                Navigator.pop(context); // Navigates back to the lessons screen
+                Navigator.pop(context);
               },
             ),
           ),
@@ -96,12 +91,12 @@ class _LessonPageOneState extends State<LessonPageOne> {
                 child: const Text('Back'),
               ),
             ),
-          if (_currentPage < 4)
+          if (_currentPage < 6)
             Positioned(
               right: 20,
               top: MediaQuery.of(context).size.height * 0.85,
               child: ElevatedButton(
-                onPressed: (_currentPage == 0 || _currentPage == 1 || _isAnswerCorrect) ? _nextPage : null,
+                onPressed: _nextPage,
                 child: const Text('Next'),
               ),
             ),

@@ -5,9 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import '../../dashboard/easy_level.dart';
 
 class ApplicationPage extends StatefulWidget {
-  final Function(bool) onCheckAnswer;
-
-  const ApplicationPage({required this.onCheckAnswer, Key? key}) : super(key: key);
+  const ApplicationPage({super.key});
 
   @override
   _ApplicationPageState createState() => _ApplicationPageState();
@@ -16,6 +14,7 @@ class ApplicationPage extends StatefulWidget {
 class _ApplicationPageState extends State<ApplicationPage> {
   int score = 0;
   bool hasAnswered = false;
+  final TextEditingController _answerController = TextEditingController();
 
   @override
   void initState() {
@@ -29,8 +28,8 @@ class _ApplicationPageState extends State<ApplicationPage> {
 
   void _checkAnswer() async {
     if (!hasAnswered) {
-      // Example logic for checking the answer
-      bool isAnswerCorrect = true; // Replace with actual validation logic
+      // Simple validation - check if the answer is not empty
+      bool isAnswerCorrect = _answerController.text.isNotEmpty;
 
       if (isAnswerCorrect) {
         setState(() {
@@ -38,37 +37,29 @@ class _ApplicationPageState extends State<ApplicationPage> {
           hasAnswered = true;
         });
 
-        // Get current user ID
         User? user = FirebaseAuth.instance.currentUser;
         if (user != null) {
           String userId = user.uid;
 
           try {
-            // Save the score to Firestore
             await FirebaseFirestore.instance.collection('users').doc(userId).set({
               'score': score,
             }, SetOptions(merge: true));
           } catch (e) {
-            // Handle error
             print("Failed to update score: $e");
           }
 
-          // Navigate to EasyLevel
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EasyLevel(),
+              builder: (context) => const EasyLevel(),
               settings: RouteSettings(arguments: {'score': score}),
             ),
           );
         } else {
-          // Handle the case when the user is not logged in
           print("No user is currently logged in.");
         }
       }
-
-      // Call the callback with the result
-      widget.onCheckAnswer(isAnswerCorrect);
     }
   }
 
@@ -79,17 +70,35 @@ class _ApplicationPageState extends State<ApplicationPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Application Page'),
+            const Text(
+              'Cybersecurity Application',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter your answer',
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Describe a real-world scenario where cybersecurity is crucial.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                controller: _answerController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your answer here',
+                ),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: hasAnswered ? null : _checkAnswer,
-              child: const Text('I\'m done!'),
+              child: const Text('Submit Answer'),
             ),
           ],
         ),
