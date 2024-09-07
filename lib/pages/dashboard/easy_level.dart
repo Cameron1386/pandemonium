@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pandemonium/pages/main_screens/home_content.dart';
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
@@ -143,7 +142,7 @@ class _EasyLevelState extends State<EasyLevel> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LessonPageTwo(),
+                                    builder: (context) => const LessonPageTwo(),
                                   ),
                                 );
                               }

@@ -5,9 +5,6 @@ import 'package:pandemonium/pages/lessons/lesson_one/importance_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'setup_page.dart';
 import 'cyber_threats_page.dart';
-import 'key_concepts_page.dart';
-import 'cyber_threats_page.dart';
-import 'importance_page.dart';
 
 class LessonPageOne extends StatefulWidget {
   const LessonPageOne({super.key});
