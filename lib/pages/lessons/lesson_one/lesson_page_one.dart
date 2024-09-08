@@ -5,7 +5,7 @@ import 'objectives_page.dart';
 import 'application_page.dart';
 
 class LessonPageOne extends StatefulWidget {
-  const LessonPageOne({Key? key}) : super(key: key);
+  const LessonPageOne({super.key});
 
   @override
   _LessonPageOneState createState() => _LessonPageOneState();

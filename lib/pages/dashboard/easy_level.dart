@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
 import '../lessons/lesson_three/lesson_page_three.dart';
 import '../lessons/lesson_four/lesson_page_four.dart';
-import 'package:pandemonium/models/lesson_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EasyLevel extends StatefulWidget {
