@@ -1,43 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:pandemonium/pages/lessons/lesson_one/application_page.dart';
-import 'package:pandemonium/pages/lessons/lesson_one/key_concepts_page.dart';
-import 'package:pandemonium/pages/lessons/lesson_one/importance_page.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'setup_page.dart';
-import 'cyber_threats_page.dart';
+import 'introduction_page.dart';
+import 'objectives_page.dart';
+import 'application_page.dart';
 
 class LessonPageOne extends StatefulWidget {
-  const LessonPageOne({super.key});
+  const LessonPageOne({Key? key}) : super(key: key);
 
   @override
-  State<LessonPageOne> createState() => _LessonPageOneState();
+  _LessonPageOneState createState() => _LessonPageOneState();
 }
 
 class _LessonPageOneState extends State<LessonPageOne> {
   final PageController _controller = PageController();
   int _currentPage = 0;
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _currentPage = index;
-    });
-  }
-
-  double _getPercentage() {
-    return (_currentPage + 1) / 7; // Updated for 7 pages
-  }
-
-  void _nextPage() {
-    if (_currentPage < 6) {
-      _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-    }
-  }
-
-  void _previousPage() {
-    if (_currentPage > 0) {
-      _controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,58 +22,66 @@ class _LessonPageOneState extends State<LessonPageOne> {
         children: [
           PageView(
             controller: _controller,
-            onPageChanged: _onPageChanged,
-            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (index) {
+              setState(() => _currentPage = index);
+            },
             children: const [
               SetupPage(),
-              KeyConceptsPage(),
-              CyberThreatsPage(),
-              ImportancePage(),
+              IntroductionPage(),
+              ObjectivesPage(),
               ApplicationPage(),
             ],
           ),
           Positioned(
-            top: 40,
-            left: 20,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Container(
-            alignment: const Alignment(0, 0.75),
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: LinearPercentIndicator(
-              lineHeight: 12.0,
-              backgroundColor: Colors.grey[300],
-              progressColor: Colors.blue,
-              percent: _getPercentage(),
-              barRadius: const Radius.circular(8.0),
-              animation: true,
-              animationDuration: 500,
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(4, (index) => _buildDot(index)),
             ),
           ),
           if (_currentPage > 0)
             Positioned(
               left: 20,
-              top: MediaQuery.of(context).size.height * 0.85,
-              child: ElevatedButton(
-                onPressed: _previousPage,
-                child: const Text('Back'),
+              bottom: 20,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _controller.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                child: const Icon(Icons.arrow_back),
               ),
             ),
-          if (_currentPage < 6)
+          if (_currentPage < 4)
             Positioned(
               right: 20,
-              top: MediaQuery.of(context).size.height * 0.85,
-              child: ElevatedButton(
-                onPressed: _nextPage,
-                child: const Text('Next'),
+              bottom: 20,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _controller.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                child: const Icon(Icons.arrow_forward),
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDot(int index) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _currentPage == index ? Colors.blue : Colors.grey,
       ),
     );
   }
