@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'introduction_page.dart';
 
 class SetupPage extends StatelessWidget {
   const SetupPage({super.key});
@@ -27,12 +29,6 @@ class SetupPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to the next page
-                },
-                child: const Text("Let's Begin!"),
-              ),
             ],
           ),
         ),
