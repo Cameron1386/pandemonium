@@ -6,7 +6,7 @@ import 'package:pandemonium/pages/dashboard/hard_level.dart';
 import 'package:pandemonium/pages/profile_page.dart';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({Key? key}) : super(key: key);
+  const HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {

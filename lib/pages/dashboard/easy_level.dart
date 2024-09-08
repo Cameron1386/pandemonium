@@ -3,11 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
+import '../lessons/lesson_three/lesson_page_three.dart';
+import '../lessons/lesson_four/lesson_page_four.dart';
 import 'package:pandemonium/models/lesson_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EasyLevel extends StatefulWidget {
-  const EasyLevel({Key? key}) : super(key: key);
+  const EasyLevel({super.key});
 
   @override
   State<EasyLevel> createState() => _EasyLevelState();
@@ -199,6 +201,16 @@ class _EasyLevelState extends State<EasyLevel> {
         context,
         MaterialPageRoute(builder: (context) => const LessonPageTwo()),
       );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LessonPageThree()),
+      );
+    } else if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LessonPageFour()),
+      );
     }
   }
 }
@@ -245,6 +257,29 @@ class LessonDashboard {
         'Interact with an infographic on cybersecurity aspects',
       ],
     ),
-    // Add more lessons here as needed
+    Lesson(
+      title: 'Types of Cyber Threats',
+      description: 'Learn about threats and their sources.',
+      duration: 20,
+      isCompleted: false,
+      objectives: [
+        'Define cybersecurity',
+        'Understand the CIA triad',
+        'Explore real-world examples of cyber threats',
+        'Interact with an infographic on cybersecurity aspects',
+      ],
+    ),
+    Lesson(
+      title: 'Why Cybersecurity is Important',
+      description: 'Explore the consequences associated with cybersecurity.',
+      duration: 20,
+      isCompleted: false,
+      objectives: [
+        'Define cybersecurity',
+        'Understand the CIA triad',
+        'Explore real-world examples of cyber threats',
+        'Interact with an infographic on cybersecurity aspects',
+      ],
+    ),
   ];
 }
