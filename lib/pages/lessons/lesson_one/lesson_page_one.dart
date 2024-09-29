@@ -5,7 +5,7 @@ import 'objectives_page.dart';
 import 'application_page.dart';
 
 class LessonPageOne extends StatefulWidget {
-  const LessonPageOne({super.key});
+  const LessonPageOne({Key? key}) : super(key: key);
 
   @override
   _LessonPageOneState createState() => _LessonPageOneState();
@@ -18,6 +18,15 @@ class _LessonPageOneState extends State<LessonPageOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lesson 1'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // This will navigate back to the lessons menu
+          },
+        ),
+      ),
       body: Stack(
         children: [
           PageView(

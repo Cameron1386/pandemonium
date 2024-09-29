@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'introduction_page.dart';
 
 class SetupPage extends StatelessWidget {
   const SetupPage({super.key});
@@ -9,18 +7,18 @@ class SetupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[50],
-      body: SafeArea(
+      body: const SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 "Welcome to Cybersecurity!",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
-              const Padding(
+              SizedBox(height: 10),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Hi folks! I'm Harry, and I'll be your guide through the digital world of cybersecurity.",
@@ -28,7 +26,7 @@ class SetupPage extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
             ],
           ),
         ),
