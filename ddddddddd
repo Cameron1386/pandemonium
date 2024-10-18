@@ -1,0 +1,199 @@
+[33mcommit d51527a2c85bc2384dd1fea82c98af53ca72a74c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sun Sep 29 20:26:17 2024 +0000
+
+    new lesson!
+
+[33mcommit c1478b036085a355e0677cbe87db63838640d2af[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sun Sep 8 15:47:44 2024 +0000
+
+    got rid of button
+
+[33mcommit 1738c6885ca9e7eac28223468b521aaca8f250f5[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sun Sep 8 15:33:36 2024 +0000
+
+    checking
+
+[33mcommit 9c53e841888f5b073fb47c84e4cb015b1215c8b5[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sun Sep 8 13:37:05 2024 +0000
+
+    looks a lot worse but follows course strucutre
+
+[33mcommit 94966113caf177b29f9504c5ffed2e8d5583e9ad[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sun Sep 8 12:35:47 2024 +0000
+
+    added more lesson with no content
+
+[33mcommit a10c9447c128b206d7158d6f47e2c394afdf80e6[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sat Sep 7 23:20:50 2024 +0000
+
+    changed easy level UI
+
+[33mcommit 300eb4140da8e44eefa675fbf362583e0f0131d4[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Sat Sep 7 22:04:02 2024 +0000
+
+    made homepage UI look better
+
+[33mcommit 27bb097710e8a682085f36b851a731a5deeb3eff[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Thu Sep 5 01:43:52 2024 +0000
+
+    bad lesson one
+
+[33mcommit a65e1a6e7087f8d4d6b5109b9d5ff3276ff11292[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Tue Sep 3 18:13:56 2024 -0400
+
+    leaderboard
+
+[33mcommit 692fe944ea67f427a6e3f0bdbea6e6f402626144[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Aug 8 12:36:43 2024 -0400
+
+    fied the profile pic problem in the ai chat
+
+[33mcommit 68d18978bb2c39346665794f5718667b2b4d8728[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Aug 8 11:32:57 2024 -0400
+
+    fixed home screen bug
+
+[33mcommit 9e17a7b48fb1d205022f94b1a61456a2a7a912ec[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Aug 7 20:38:58 2024 -0400
+
+    added some const
+
+[33mcommit 89326b29a02f950903f6831c55f5cf25c43f64e6[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Aug 7 20:34:01 2024 -0400
+
+    firestore backend added with score
+
+[33mcommit 7feddd235f179aa0d48336722e8ef2a42030970b[m
+Merge: 7681364 c2e5b4a
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 24 11:48:09 2024 -0400
+
+    Merge branch 'main' of https://github.com/Cameron1386/pandemonium
+
+[33mcommit 76813641d05c80bbae08867e73c6cd659d43ae36[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 24 11:43:55 2024 -0400
+
+    testing by adding comment
+
+[33mcommit c2e5b4a86a925ed92da75eef9fe2a844f565c31f[m[33m ([m[1;31morigin/cam[m[33m)[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Wed Jul 24 15:42:52 2024 +0000
+
+    i added a comment
+
+[33mcommit eb3256db41fec19d8a338c860803ddd3c7982ed9[m
+Merge: 2f659d1 59f8747
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Fri Jul 19 01:17:26 2024 +0000
+
+    Merge branch 'main' of https://github.com/Cameron1386/pandemonium
+
+[33mcommit 2f659d17eea3b94a8debc4c7be4e10d51051d296[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Fri Jul 19 01:17:18 2024 +0000
+
+    test
+
+[33mcommit ce918c12dac46cb820da5a696094619b81a4b7b8[m
+Author: supercam1386 <supercam1386@gmail.com>
+Date:   Fri Jul 19 01:12:42 2024 +0000
+
+    test
+
+[33mcommit 59f8747efb52d39b0db6462945057f51a4e6fbfe[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Jul 18 21:11:00 2024 -0400
+
+    test
+
+[33mcommit 3829af1805c165ca4e56628a6ddd52963def006b[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Jul 18 20:59:43 2024 -0400
+
+    added back button to lessons and made it so that you have to hit the next button to go to the next page
+
+[33mcommit f42b8cfff1ed836a9e5cbd61b7b3cdfac882f2cf[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Tue Jul 16 17:25:21 2024 -0400
+
+    did sum stuff
+
+[33mcommit c4f28575dd237d00d094afc729cee5fd69a3c065[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Jul 11 20:12:14 2024 -0400
+
+    got rid of the apple sign in
+
+[33mcommit 9a3093f7f7bac56a87a911d33ab633551e031079[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Thu Jul 11 20:05:12 2024 -0400
+
+    fixed the register user bug
+
+[33mcommit c574e48b5320b97f030cc9076ee9a8243545794f[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 21:05:09 2024 -0400
+
+    made the profile icon on the home page clickable
+
+[33mcommit 694be5a1dc8a125de378c9c428ad8893f0ee051d[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 20:55:07 2024 -0400
+
+    made the homepage screens clickable
+
+[33mcommit 4f23743829ee182a7183c2944e90913ea1b8c0aa[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 18:08:26 2024 -0400
+
+    got google auth for login
+
+[33mcommit 9a7be38d4374d2d00e029b5d871273e34ac37946[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 17:08:56 2024 -0400
+
+    made the leaderboard page have two tabs and added a notification system
+
+[33mcommit bc9df7bf153f97d688d44f4c7357bb8fd3433c17[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 15:09:39 2024 -0400
+
+    made the ai ui a little better
+
+[33mcommit 97778458b212aa405b5c3054974b4ef5bc98038a[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 14:43:50 2024 -0400
+
+    added the ai with gemini api
+
+[33mcommit 0d6b9a3bd524e22c052d70894f9e65a45d2d49bb[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 12:18:30 2024 -0400
+
+    added the heatmap to the streaks
+
+[33mcommit 107fa1831ace07f3359959ec49db41d7408f134e[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Wed Jul 10 11:15:12 2024 -0400
+
+    added multiple screens to make sure bottom nav bar gets to different screens
+
+[33mcommit 0216bf00159a59279ae54da387facd741524dd61[m
+Author: Ram SP <ramspmm@gmail.com>
+Date:   Tue Jul 9 21:06:40 2024 -0400
+
+    first commit
