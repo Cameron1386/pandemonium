@@ -31,9 +31,11 @@ class _AiPageState extends State<AiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Elder Panda'),
+        title: const Text('Elder Panda', textAlign: TextAlign.center),
         backgroundColor: Colors.deepPurple,
-        
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        leading: SizedBox(width: 16), // Add a space box to the left
       ),
       body: _buildChatUI(),
     );

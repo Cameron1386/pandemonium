@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pandemonium/pages/home_page.dart';
+import 'package:pandemonium/pages/main_screens/home_content.dart';
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
@@ -51,7 +53,16 @@ class _EasyLevelState extends State<EasyLevel> {
         children: [
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeContent()),
+              );
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
           ),
           const Text(
             'Cybersecurity Basics',
