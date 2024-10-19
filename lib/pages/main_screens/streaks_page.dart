@@ -7,86 +7,120 @@ class StreaksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Streaks Overview',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
+      appBar: _buildAppBar(),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          // Gradient Background
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF8EC5FC), Color(0xFFE0C3FC)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
-          // Main content with heatmap
+          _buildGradientBackground(),
           SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                // Header text
-                const Text(
-                  "Your Activity Streaks",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+                const _HeaderText(),
                 const SizedBox(height: 30),
-                // HeatMap wrapped in a card
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    elevation: 10,
-                    shadowColor: Colors.black.withOpacity(0.25),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: MyHeatMap(),
-                    ),
-                  ),
-                ),
+                _buildHeatMapCard(),
                 const SizedBox(height: 40),
-                // Button to show streak details (example of adding interaction)
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    backgroundColor: const Color(0xFF6200EE),
-                    elevation: 10,
-                  ),
-                  onPressed: () {
-                    // Add functionality for showing streak details
-                  },
-                  child: const Text(
-                    'View Detailed Streaks',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
+                _buildViewDetailsButton(),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: const Text(
+        'Streaks Overview',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      centerTitle: true,
+    );
+  }
+
+  Container _buildGradientBackground() {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF0D1B2A), Color(0xFF1B263B)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+    );
+  }
+
+  Padding _buildHeatMapCard() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Card(
+        color: const Color(0xFF1B263B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 8,
+        shadowColor: Colors.black.withOpacity(0.4),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              const Text(
+                'Streak History',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const MyHeatMap(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _buildViewDetailsButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        backgroundColor: const Color(0xFF4CAF50),
+        elevation: 10,
+      ),
+      onPressed: () {
+        // Add functionality for showing streak details
+      },
+      child: const Text(
+        'View Detailed Streaks',
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+    );
+  }
+}
+
+class _HeaderText extends StatelessWidget {
+  const _HeaderText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      "Your Activity Streaks",
+      style: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        letterSpacing: 1.2,
       ),
     );
   }
@@ -95,33 +129,48 @@ class StreaksPage extends StatelessWidget {
 class MyHeatMap extends StatelessWidget {
   const MyHeatMap({super.key});
 
+  // Custom dataset with meaningful data points
+  Map<DateTime, int> _customDataset() {
+    return {
+      DateTime(2023, 10, 1): 5,
+      DateTime(2023, 10, 2): 7,
+      DateTime(2023, 10, 3): 2,
+      DateTime(2023, 10, 4): 9,
+      DateTime(2023, 10, 5): 1,
+      DateTime(2023, 10, 6): 3,
+      DateTime(2023, 10, 7): 6,
+      DateTime(2023, 10, 8): 8,
+      // Add more meaningful data here for different dates
+      // This represents actual streak or event data
+      DateTime(2024, 1, 5): 4,
+      DateTime(2024, 3, 18): 9,
+      DateTime(2024, 5, 10): 3,
+      DateTime(2024, 6, 20): 7,
+      // Repeat or customize as per actual usage data
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return HeatMap(
-      datasets: {
-        DateTime(2024, 7, 10): 3,
-        DateTime(2024, 7, 11): 7,
-        // (additional data points removed for brevity)
-        DateTime(2025, 4, 7): 7,
-      },
-      startDate: DateTime.now(),
-      endDate: DateTime.now().add(const Duration(days: 365)),
+      datasets: _customDataset(),
+      startDate: DateTime.now().subtract(const Duration(days: 365)),
+      endDate: DateTime.now(),
       size: 40,
-      textColor: Colors.black,
+      textColor: Colors.white,
       colorMode: ColorMode.opacity,
       showText: false,
       scrollable: true,
       colorsets: const {
-        1: Color.fromARGB(20, 2, 179, 8),
-        2: Color.fromARGB(40, 2, 179, 8),
-        3: Color.fromARGB(60, 2, 179, 8),
-        4: Color.fromARGB(80, 2, 179, 8),
-        5: Color.fromARGB(100, 2, 179, 8),
-        6: Color.fromARGB(120, 2, 179, 8),
-        7: Color.fromARGB(150, 2, 179, 8),
-        8: Color.fromARGB(180, 2, 179, 8),
-        9: Color.fromARGB(220, 2, 179, 8),
-        10: Color.fromARGB(255, 2, 179, 8),
+        1: Color.fromARGB(30, 255, 223, 0),
+        2: Color.fromARGB(60, 255, 223, 0),
+        3: Color.fromARGB(90, 255, 223, 0),
+        4: Color.fromARGB(120, 255, 223, 0),
+        5: Color.fromARGB(150, 255, 223, 0),
+        6: Color.fromARGB(180, 255, 223, 0),
+        7: Color.fromARGB(210, 255, 223, 0),
+        8: Color.fromARGB(240, 255, 223, 0),
+        9: Color.fromARGB(255, 255, 223, 0),
       },
     );
   }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pandemonium/pages/home_page.dart';
 import 'package:pandemonium/pages/main_screens/home_content.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
 import '../lessons/lesson_three/lesson_page_three.dart';
 import '../lessons/lesson_four/lesson_page_four.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class EasyLevel extends StatefulWidget {
   const EasyLevel({super.key});
@@ -53,14 +53,7 @@ class _EasyLevelState extends State<EasyLevel> {
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeContent()),
-              );
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-              );
+              Navigator.pop(context); // Use pop to return to the previous screen
             },
           ),
           const Text(
@@ -78,18 +71,31 @@ class _EasyLevelState extends State<EasyLevel> {
   }
 
   Widget _buildScoreWidget() {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return const SizedBox(); // Return an empty widget if the user is not signed in
+    }
+
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseAuth.instance.currentUser != null
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .snapshots()
-          : null,
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .snapshots(),
       builder: (context, snapshot) {
         int score = 0;
-        if (snapshot.hasData && snapshot.data!.exists) {
-          score = snapshot.data!['score'] ?? 0;
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator(); // Show loading spinner while waiting
         }
+
+        if (snapshot.hasError) {
+          return const Icon(Icons.error, color: Colors.white); // Show error icon if there is an error
+        }
+
+        if (snapshot.hasData && snapshot.data!.exists) {
+          score = snapshot.data!['score'] ?? 0; // Safely access score, fallback to 0
+        }
+
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(

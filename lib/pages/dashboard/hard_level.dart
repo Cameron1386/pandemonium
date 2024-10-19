@@ -53,10 +53,7 @@ class _HardLevelState extends State<HardLevel> {
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomeContent()),
-              );
+              Navigator.pop(context); // Use pop instead of pushReplacement
             },
           ),
           Expanded(
@@ -78,29 +75,32 @@ class _HardLevelState extends State<HardLevel> {
   }
 
   Widget _buildScoreWidget() {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      return const SizedBox(); // Return an empty widget if the user is null
+    }
+
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseAuth.instance.currentUser != null
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .snapshots()
-          : null,
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
-        
+
         if (snapshot.hasError) {
-          return Icon(Icons.error, color: Colors.white);
+          return const Icon(Icons.error, color: Colors.white);
         }
 
         int score = 0;
         if (snapshot.hasData && snapshot.data!.exists) {
-          // Use 'score' as a fallback if 'advancedScore' doesn't exist
-          score = (snapshot.data!.data() as Map<String, dynamic>)['advancedScore'] ?? 
-                  (snapshot.data!.data() as Map<String, dynamic>)['score'] ?? 0;
+          final data = snapshot.data!.data() as Map<String, dynamic>;
+          score = data['advancedScore'] ?? data['score'] ?? 0; // Safe access to score
         }
-        
+
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
@@ -110,11 +110,11 @@ class _HardLevelState extends State<HardLevel> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.security, color: Colors.amber, size: 16),
-              SizedBox(width: 4),
+              const Icon(Icons.security, color: Colors.amber, size: 16),
+              const SizedBox(width: 4),
               Text(
                 '$score',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
@@ -171,17 +171,17 @@ class _HardLevelState extends State<HardLevel> {
                   ),
                 ],
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 lesson.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 lesson.description,
                 style: TextStyle(
@@ -191,16 +191,16 @@ class _HardLevelState extends State<HardLevel> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Icon(Icons.access_time, size: 14, color: Colors.grey[600]),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Text(
                     '${lesson.duration} mins',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: () => _navigateToLesson(index),
                     style: ElevatedButton.styleFrom(
@@ -209,11 +209,11 @@ class _HardLevelState extends State<HardLevel> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     ),
                     child: Text(
                       lesson.isCompleted ? 'Review' : 'Start',
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ),
                 ],
@@ -254,6 +254,7 @@ class _HardLevelState extends State<HardLevel> {
     }
   }
 }
+
 class Lesson {
   final String title;
   final String description;
@@ -267,7 +268,7 @@ class Lesson {
     required this.duration,
     this.isCompleted = false,
     required this.objectives,
-  });
+  }) : assert(title != null && description != null && duration != null);
 }
 
 class LessonDashboard {
