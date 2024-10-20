@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pandemonium/pages/main_screens/home_content.dart';
 
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
@@ -94,7 +95,7 @@ class _EasyLevelState extends State<EasyLevel> {
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeContent()));
             },
           ),
           const Text(
