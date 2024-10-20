@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../home_page.dart';
+import 'package:pandemonium/pages/main_screens/home_content.dart';
+
 import 'login_or_register_page.dart';
 
 class AuthPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           // User is logged in
           if (snapshot.hasData) {
-            return const HomePage();
+            return const HomeContent();
           }
 
 
