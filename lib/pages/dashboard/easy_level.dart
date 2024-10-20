@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:pandemonium/pages/main_screens/home_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../components/lesson_tile.dart';
 import '../lessons/lesson_one/lesson_page_one.dart';
 import '../lessons/lesson_two/lesson_page_two.dart';
@@ -18,6 +17,48 @@ class EasyLevel extends StatefulWidget {
 
 class _EasyLevelState extends State<EasyLevel> {
   final LessonDashboard lessonDashboard = LessonDashboard();
+  List<int> completedLessons = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCompletedLessons();
+  }
+
+  // Fetch completed lessons from Firestore
+  Future<void> _fetchCompletedLessons() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String userId = user.uid;
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+      if (userDoc.exists && userDoc.data() != null) {
+        setState(() {
+          completedLessons = List<int>.from(userDoc['completedLessons'] ?? []);
+        });
+      }
+    }
+  }
+
+  // Mark lesson as completed
+  Future<void> _completeLesson(int lessonIndex) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String userId = user.uid;
+
+      setState(() {
+        completedLessons.add(lessonIndex); // Update local state
+      });
+
+      try {
+        await FirebaseFirestore.instance.collection('users').doc(userId).update({
+          'completedLessons': FieldValue.arrayUnion([lessonIndex]),  // Update Firestore
+        });
+      } catch (e) {
+        print('Error updating completed lessons: $e');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +94,7 @@ class _EasyLevelState extends State<EasyLevel> {
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.pop(context); // Use pop to return to the previous screen
+              Navigator.pop(context);
             },
           ),
           const Text(
@@ -74,26 +115,23 @@ class _EasyLevelState extends State<EasyLevel> {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      return const SizedBox(); // Return an empty widget if the user is not signed in
+      return const SizedBox(); // Return empty widget if no user
     }
 
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .snapshots(),
+      stream: FirebaseFirestore.instance.collection('users').doc(user.uid).snapshots(),
       builder: (context, snapshot) {
         int score = 0;
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Show loading spinner while waiting
+          return const CircularProgressIndicator();  // Show loading spinner
         }
 
         if (snapshot.hasError) {
-          return const Icon(Icons.error, color: Colors.white); // Show error icon if there is an error
+          return const Icon(Icons.error, color: Colors.white);
         }
 
         if (snapshot.hasData && snapshot.data!.exists) {
-          score = snapshot.data!['score'] ?? 0; // Safely access score, fallback to 0
+          score = snapshot.data!['score'] ?? 0; // Fallback to 0 if score doesn't exist
         }
 
         return Container(
@@ -132,6 +170,8 @@ class _EasyLevelState extends State<EasyLevel> {
   }
 
   Widget _buildLessonCard(Lesson lesson, int index) {
+    bool isCompleted = completedLessons.contains(index);  // Check if lesson is completed
+
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 4,
@@ -155,8 +195,8 @@ class _EasyLevelState extends State<EasyLevel> {
                     ),
                   ),
                   Icon(
-                    lesson.isCompleted ? Icons.check_circle : Icons.circle_outlined,
-                    color: lesson.isCompleted ? Colors.green : Colors.grey,
+                    isCompleted ? Icons.check_circle : Icons.circle_outlined,
+                    color: isCompleted ? Colors.green : Colors.grey,
                   ),
                 ],
               ),
@@ -195,7 +235,7 @@ class _EasyLevelState extends State<EasyLevel> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text(lesson.isCompleted ? 'Review' : 'Start'),
+                    child: Text(isCompleted ? 'Review' : 'Start'),
                   ),
                 ],
               ),
@@ -211,22 +251,22 @@ class _EasyLevelState extends State<EasyLevel> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LessonPageOne()),
-      );
+      ).then((_) => _completeLesson(index));  // Mark lesson as completed
     } else if (index == 1) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LessonPageTwo()),
-      );
+      ).then((_) => _completeLesson(index));
     } else if (index == 2) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LessonPageThree()),
-      );
+      ).then((_) => _completeLesson(index));
     } else if (index == 3) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LessonPageFour()),
-      );
+      ).then((_) => _completeLesson(index));
     }
   }
 }
