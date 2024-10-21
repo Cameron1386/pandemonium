@@ -90,8 +90,8 @@ class _DailyLevelState extends State<DailyLevel> {
       backgroundColor: const Color(0xFF0D1B2A), // Dark theme background color
       appBar: AppBar(
         title: Text(
-          'Cybersecurity Challenge | Score: $score',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+          'Cybersecurity Challenge\nScore: $score',
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
         backgroundColor: const Color(0xFF1B263B), // Dark theme AppBar color
         elevation: 5.0,
