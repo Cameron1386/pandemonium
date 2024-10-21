@@ -125,7 +125,7 @@ class _StreaksPageState extends State<StreaksPage> {
         'Streaks Overview',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 24,
+          fontSize: 24, color: Colors.white
         ),
       ),
       backgroundColor: Colors.transparent,
