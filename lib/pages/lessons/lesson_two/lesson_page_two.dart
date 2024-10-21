@@ -27,7 +27,7 @@ class _LessonPageTwoState extends State<LessonPageTwo> {
     return Scaffold(
       backgroundColor: const Color(0xFF0D1B2A),
       appBar: AppBar(
-        title: const Text('Lesson 2: Definition and Key Concepts'),
+        title: const Text('Definitions and Key Concepts', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF1B263B),
       ),
       body: Stack(

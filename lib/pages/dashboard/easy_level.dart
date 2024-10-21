@@ -301,7 +301,7 @@ class LessonDashboard {
       ],
     ),
     Lesson(
-      title: 'Definition and Key Concepts',
+      title: 'Definitions and Key Concepts',
       description: 'Explore the CIA triad: Confidentiality, Integrity, and Availability.',
       duration: 20,
       isCompleted: false,

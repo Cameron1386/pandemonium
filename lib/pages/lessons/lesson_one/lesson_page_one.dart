@@ -20,7 +20,7 @@ class _LessonPageOneState extends State<LessonPageOne> {
     return Scaffold(
       backgroundColor: const Color(0xFF0D1B2A), // Dark theme background color
       appBar: AppBar(
-        title: const Text('Lesson 1', style: TextStyle(color: Colors.white)),
+        title: const Text('Welcome to Cybersecurity', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF1B263B), // Dark theme AppBar color
         iconTheme: const IconThemeData(color: Colors.white),
         leading: IconButton(
