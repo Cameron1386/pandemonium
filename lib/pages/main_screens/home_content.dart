@@ -1,6 +1,6 @@
-// lib/main_screens/home_content.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore import
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pandemonium/pages/dashboard/daily_level.dart';
 import 'package:pandemonium/pages/dashboard/easy_level.dart';
@@ -20,12 +20,17 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent> {
   int currentIndex = 0;
   bool _scaleFactor = false; // For card scaling
-
   final user = FirebaseAuth.instance.currentUser!;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkForUsername(); // Check if the user has a username on load
+  }
 
   // List of main pages
   final List _pages = [
-    // Home content itself
     const _InnerHomeContent(),
     const AiPage(),
     const LeaderboardPage(),
@@ -48,6 +53,73 @@ class _HomeContentState extends State<HomeContent> {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
     Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  // Method to prompt user for username if not set
+  Future<void> _checkForUsername() async {
+    DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
+
+    if (!userDoc.exists || !userDoc.data().toString().contains('username')) {
+      _promptForUsername(); // Prompt if username doesn't exist
+    }
+  }
+
+  // Dialog to prompt user for a username
+  Future<void> _promptForUsername() async {
+    String? username;
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Create a Username"),
+          content: TextField(
+            onChanged: (value) {
+              username = value;
+            },
+            decoration: const InputDecoration(hintText: "Enter your username"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Submit"),
+              onPressed: () async {
+                if (username != null && username!.isNotEmpty) {
+                  await _saveUsername(username!);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Save the username to Firebase Firestore
+  Future<void> _saveUsername(String username) async {
+    // Check if the username already exists
+    var usernameExists = await _firestore
+        .collection('users')
+        .where('username', isEqualTo: username)
+        .get();
+
+    if (usernameExists.docs.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username already taken, please choose another one')),
+      );
+      _promptForUsername(); // Prompt again if taken
+    } else {
+      // If not taken, save the username to the user's document
+      await _firestore.collection('users').doc(user.uid).set({
+        'username': username,
+        'email': user.email,
+        'createdAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username created successfully!')),
+      );
+    }
   }
 
   @override

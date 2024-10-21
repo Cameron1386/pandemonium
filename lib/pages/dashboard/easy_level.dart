@@ -24,37 +24,40 @@ class _EasyLevelState extends State<EasyLevel> {
     _fetchCompletedLessons();
   }
 
-  // Fetch completed lessons from Firestore
   Future<void> _fetchCompletedLessons() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String userId = user.uid;
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
-
-      if (userDoc.exists && userDoc.data() != null) {
-        setState(() {
-          completedLessons = List<int>.from(userDoc['completedLessons'] ?? []);
-        });
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+        if (userDoc.exists) {
+          setState(() {
+            completedLessons = List<int>.from(userDoc['completedLessons'] ?? []);
+          });
+        }
+      } catch (e) {
+        print('Error fetching completed lessons: $e');
       }
     }
   }
 
-  // Mark lesson as completed
   Future<void> _completeLesson(int lessonIndex) async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String userId = user.uid;
 
-      setState(() {
-        completedLessons.add(lessonIndex); // Update local state
-      });
-
-      try {
-        await FirebaseFirestore.instance.collection('users').doc(userId).update({
-          'completedLessons': FieldValue.arrayUnion([lessonIndex]),  // Update Firestore
+      if (!completedLessons.contains(lessonIndex)) {
+        setState(() {
+          completedLessons.add(lessonIndex);
         });
-      } catch (e) {
-        print('Error updating completed lessons: $e');
+
+        try {
+          await FirebaseFirestore.instance.collection('users').doc(userId).update({
+            'completedLessons': FieldValue.arrayUnion([lessonIndex]),
+          });
+        } catch (e) {
+          print('Error updating completed lessons: $e');
+        }
       }
     }
   }
@@ -74,9 +77,7 @@ class _EasyLevelState extends State<EasyLevel> {
           child: Column(
             children: [
               _buildAppBar(),
-              Expanded(
-                child: _buildLessonList(),
-              ),
+              Expanded(child: _buildLessonList()),
             ],
           ),
         ),
@@ -93,7 +94,7 @@ class _EasyLevelState extends State<EasyLevel> {
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeContent()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeContent()));
             },
           ),
           const Text(
@@ -112,27 +113,20 @@ class _EasyLevelState extends State<EasyLevel> {
 
   Widget _buildScoreWidget() {
     final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      return const SizedBox(); // Return empty widget if no user
-    }
+    if (user == null) return const SizedBox();
 
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance.collection('users').doc(user.uid).snapshots(),
       builder: (context, snapshot) {
-        int score = 0;
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();  // Show loading spinner
+          return const CircularProgressIndicator();
         }
 
-        if (snapshot.hasError) {
+        if (snapshot.hasError || !snapshot.hasData || !snapshot.data!.exists) {
           return const Icon(Icons.error, color: Colors.white);
         }
 
-        if (snapshot.hasData && snapshot.data!.exists) {
-          score = snapshot.data!['score'] ?? 0; // Fallback to 0 if score doesn't exist
-        }
-
+        int score = snapshot.data!['score'] ?? 0;
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
@@ -145,10 +139,7 @@ class _EasyLevelState extends State<EasyLevel> {
               const SizedBox(width: 5),
               Text(
                 '$score',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -169,7 +160,7 @@ class _EasyLevelState extends State<EasyLevel> {
   }
 
   Widget _buildLessonCard(Lesson lesson, int index) {
-    bool isCompleted = completedLessons.contains(index);  // Check if lesson is completed
+    bool isCompleted = completedLessons.contains(index);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -202,37 +193,26 @@ class _EasyLevelState extends State<EasyLevel> {
               const SizedBox(height: 8),
               Text(
                 lesson.title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
                 lesson.description,
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 14,
-                ),
+                style: TextStyle(color: Colors.grey[600], fontSize: 14),
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
                   Icon(Icons.access_time, size: 16, color: Colors.grey[600]),
                   const SizedBox(width: 4),
-                  Text(
-                    '${lesson.duration} mins',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 14),
-                  ),
+                  Text('${lesson.duration} mins', style: TextStyle(color: Colors.grey[600], fontSize: 14)),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () => _navigateToLesson(index),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.green[700],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     ),
                     child: Text(isCompleted ? 'Review' : 'Start'),
                   ),
@@ -250,7 +230,7 @@ class _EasyLevelState extends State<EasyLevel> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LessonPageOne()),
-      ).then((_) => _completeLesson(index));  // Mark lesson as completed
+      ).then((_) => _completeLesson(index));
     } else if (index == 1) {
       Navigator.push(
         context,
@@ -292,7 +272,6 @@ class LessonDashboard {
       title: 'Welcome to Cybersecurity',
       description: 'Meet Harry and learn about the importance of cybersecurity in today\'s digital world.',
       duration: 15,
-      isCompleted: false,
       objectives: [
         'Understand the basics of cybersecurity and its importance',
         'Recognize common cyber threats and their impact',
@@ -301,10 +280,9 @@ class LessonDashboard {
       ],
     ),
     Lesson(
-      title: 'Definitions and Key Concepts',
+      title: 'Definition and Key Concepts',
       description: 'Explore the CIA triad: Confidentiality, Integrity, and Availability.',
       duration: 20,
-      isCompleted: false,
       objectives: [
         'Define cybersecurity',
         'Understand the CIA triad',
@@ -316,7 +294,6 @@ class LessonDashboard {
       title: 'Types of Cyber Threats',
       description: 'Learn about threats and their sources.',
       duration: 20,
-      isCompleted: false,
       objectives: [
         'Define cybersecurity',
         'Understand the CIA triad',
@@ -328,7 +305,6 @@ class LessonDashboard {
       title: 'Why Cybersecurity is Important',
       description: 'Explore the consequences associated with cybersecurity.',
       duration: 20,
-      isCompleted: false,
       objectives: [
         'Define cybersecurity',
         'Understand the CIA triad',

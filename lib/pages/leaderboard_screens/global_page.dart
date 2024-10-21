@@ -10,35 +10,33 @@ class GlobalPage extends StatefulWidget {
 }
 
 class _GlobalPageState extends State<GlobalPage> {
-  Map<String, String?> _userEmails = {};
+  Map<String, String?> _usernames = {}; // Store usernames
 
-  Future<void> _fetchUserEmails(List<String> userIds) async {
+  Future<void> _fetchUsernames(List<String> userIds) async {
     try {
       // Start a timer to set to "Anonymous" after 5 seconds if still loading
       Future.delayed(const Duration(seconds: 5), () {
         setState(() {
           for (var userId in userIds) {
-            _userEmails[userId] ??= 'Anonymous'; // Assign "Anonymous" if still not fetched
+            _usernames[userId] ??= 'Anonymous'; // Assign "Anonymous" if still not fetched
           }
         });
       });
 
-      // Fetch user emails in batch
-      List<User?> users = await Future.wait(
-        userIds.map((userId) => FirebaseAuth.instance.userChanges().firstWhere(
-              (user) => user?.uid == userId,
-              orElse: () => null,
-            )),
+      // Fetch usernames in batch from Firestore collection
+      List<DocumentSnapshot> userDocs = await Future.wait(
+        userIds.map((userId) => FirebaseFirestore.instance.collection('users').doc(userId).get()),
       );
 
-      // Update the state if emails were fetched successfully
+      // Update the state with the fetched usernames
       setState(() {
-        for (var i = 0; i < users.length; i++) {
-          _userEmails[userIds[i]] = users[i]?.email ?? 'Anonymous';
+        for (var i = 0; i < userDocs.length; i++) {
+          final userData = userDocs[i].data() as Map<String, dynamic>?;
+          _usernames[userIds[i]] = userData?['username'] ?? 'Anonymous';
         }
       });
     } catch (e) {
-      print('Error fetching user emails: $e');
+      print('Error fetching usernames: $e');
     }
   }
 
@@ -46,7 +44,6 @@ class _GlobalPageState extends State<GlobalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
-        
         stream: FirebaseFirestore.instance
             .collection('users')
             .orderBy('score', descending: true)
@@ -67,12 +64,12 @@ class _GlobalPageState extends State<GlobalPage> {
           // Extract all userIds from the fetched documents
           final userIds = userDocs.map((doc) => doc.id).toList();
 
-          // If we haven't fetched emails yet, trigger it
-          if (_userEmails.isEmpty) {
-            _fetchUserEmails(userIds);
+          // If we haven't fetched usernames yet, trigger it
+          if (_usernames.isEmpty) {
+            _fetchUsernames(userIds);
             return const Center(child: CircularProgressIndicator());
           }
-          
+
           return ListView.builder(
             itemCount: userDocs.length,
             itemBuilder: (context, index) {
@@ -81,8 +78,8 @@ class _GlobalPageState extends State<GlobalPage> {
               final score = (user['score'] as num?)?.toInt() ?? 0;
               final isCurrentUser = userId == currentUserId;
 
-              // Get the email from preloaded map or show "Loading..." if not yet fetched
-              final email = _userEmails[userId] ?? 'Loading...';
+              // Get the username from preloaded map or show "Loading..." if not yet fetched
+              final username = _usernames[userId] ?? 'Loading...';
 
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -95,7 +92,7 @@ class _GlobalPageState extends State<GlobalPage> {
                     ),
                   ),
                   title: Text(
-                    email,
+                    username,
                     style: TextStyle(
                       fontWeight: isCurrentUser ? FontWeight.bold : FontWeight.normal,
                     ),
