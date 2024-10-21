@@ -52,6 +52,7 @@ dependencies:
   cloud_firestore: ^5.1.0
   google_api_availability: ^5.0.0
   google_fonts: ^6.2.0
+
   
 
 dev_dependencies:
