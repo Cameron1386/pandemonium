@@ -46,6 +46,7 @@ class _GlobalPageState extends State<GlobalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
+        
         stream: FirebaseFirestore.instance
             .collection('users')
             .orderBy('score', descending: true)
@@ -71,7 +72,7 @@ class _GlobalPageState extends State<GlobalPage> {
             _fetchUserEmails(userIds);
             return const Center(child: CircularProgressIndicator());
           }
-
+          
           return ListView.builder(
             itemCount: userDocs.length,
             itemBuilder: (context, index) {
