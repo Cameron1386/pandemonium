@@ -5,19 +5,18 @@ class RealWorldExamplesPage extends StatelessWidget {
 
   Widget _buildExampleCard(String title, String description, String example, String imagePath) {
     return Card(
+      color: const Color(0xFF1B263B),
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 10),
-            Text(description, style: const TextStyle(fontSize: 16)),
+            Text(description, style: const TextStyle(fontSize: 16, color: Colors.white)),
             const SizedBox(height: 10),
-            Text("Example: $example", style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
-            const SizedBox(height: 10),
-            Center(child: Image.asset(imagePath, height: 150)),
+            Text("Example: $example", style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.white)),
           ],
         ),
       ),
@@ -33,7 +32,7 @@ class RealWorldExamplesPage extends StatelessWidget {
         children: [
           const Text(
             "Real-World Examples",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           _buildExampleCard(

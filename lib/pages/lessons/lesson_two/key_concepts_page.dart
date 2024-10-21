@@ -5,16 +5,17 @@ class KeyConceptsPage extends StatelessWidget {
 
   Widget _buildConceptCard(String title, String description, IconData icon) {
     return Card(
+      color: const Color(0xFF1B263B),
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Icon(icon, size: 48, color: Colors.blue),
+            Icon(icon, size: 48, color: Colors.teal[300]),
             const SizedBox(height: 10),
-            Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 10),
-            Text(description, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
+            Text(description, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, color: Colors.white)),
           ],
         ),
       ),
@@ -30,7 +31,7 @@ class KeyConceptsPage extends StatelessWidget {
         children: [
           const Text(
             "Key Concepts: CIA Triad",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           _buildConceptCard(

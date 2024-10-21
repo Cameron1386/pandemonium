@@ -13,17 +13,17 @@ class DefinitionPage extends StatelessWidget {
         children: [
           const Text(
             "What exactly is cybersecurity?",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 20),
           const Text(
             "Definition:",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 10),
           const Text(
             "Cybersecurity refers to the practice of protecting systems, networks, and programs from digital attacks.",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.white),
           ),
         ],
       ),

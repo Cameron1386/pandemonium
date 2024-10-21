@@ -25,57 +25,74 @@ class _LessonPageTwoState extends State<LessonPageTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0D1B2A),
       appBar: AppBar(
         title: const Text('Lesson 2: Definition and Key Concepts'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF1B263B),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (int page) {
-                setState(() {
-                  _currentPage = page;
-                });
-              },
-              children: _pages,
-            ),
+          PageView(
+            controller: _pageController,
+            onPageChanged: (int page) {
+              setState(() {
+                _currentPage = page;
+              });
+            },
+            children: _pages,
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (_currentPage > 0)
-                  ElevatedButton(
-                    onPressed: () {
-                      _pageController.previousPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: const Text('Previous'),
-                  )
-                else
-                  const SizedBox(width: 80),
-                Text('${_currentPage + 1} / ${_pages.length}'),
-                if (_currentPage < _pages.length - 1)
-                  ElevatedButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: const Text('Next'),
-                  )
-                else
-                  const SizedBox(width: 80),
-              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(_pages.length, (index) => _buildDot(index)),
             ),
           ),
+          if (_currentPage > 0)
+            Positioned(
+              left: 20,
+              bottom: 20,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _pageController.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                backgroundColor: Colors.teal[300],
+                child: const Icon(Icons.arrow_back, color: Colors.white),
+              ),
+            ),
+          if (_currentPage < _pages.length - 1)
+            Positioned(
+              right: 20,
+              bottom: 20,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _pageController.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                backgroundColor: Colors.teal[300],
+                child: const Icon(Icons.arrow_forward, color: Colors.white),
+              ),
+            ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDot(int index) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _currentPage == index ? Colors.teal[300] : Colors.grey,
       ),
     );
   }
