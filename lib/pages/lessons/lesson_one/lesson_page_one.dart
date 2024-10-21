@@ -18,12 +18,15 @@ class _LessonPageOneState extends State<LessonPageOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0D1B2A), // Dark theme background color
       appBar: AppBar(
-        title: const Text('Lesson 1'),
+        title: const Text('Lesson 1', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF1B263B), // Dark theme AppBar color
+        iconTheme: const IconThemeData(color: Colors.white),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // This will navigate back to the lessons menu
+            Navigator.pop(context);
           },
         ),
       ),
@@ -61,7 +64,8 @@ class _LessonPageOneState extends State<LessonPageOne> {
                     curve: Curves.easeInOut,
                   );
                 },
-                child: const Icon(Icons.arrow_back),
+                backgroundColor: Colors.teal[300],
+                child: const Icon(Icons.arrow_back, color: Colors.white),
               ),
             ),
           if (_currentPage < 4)
@@ -75,7 +79,8 @@ class _LessonPageOneState extends State<LessonPageOne> {
                     curve: Curves.easeInOut,
                   );
                 },
-                child: const Icon(Icons.arrow_forward),
+                backgroundColor: Colors.teal[300],
+                child: const Icon(Icons.arrow_forward, color: Colors.white),
               ),
             ),
         ],
@@ -90,7 +95,7 @@ class _LessonPageOneState extends State<LessonPageOne> {
       height: 10,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: _currentPage == index ? Colors.blue : Colors.grey,
+        color: _currentPage == index ? Colors.teal[300] : Colors.grey,
       ),
     );
   }

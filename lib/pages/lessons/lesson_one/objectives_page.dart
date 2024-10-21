@@ -13,7 +13,7 @@ class ObjectivesPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Colors.blue[50],
+      backgroundColor: const Color(0xFF0D1B2A), // Dark theme background color
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -22,12 +22,12 @@ class ObjectivesPage extends StatelessWidget {
             children: [
               const Text(
                 "Course Objectives",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 20),
               const Text(
                 "By the end of this course, you will:",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -38,12 +38,12 @@ class ObjectivesPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         children: [
-                          Icon(Icons.check_circle, color: Colors.green[700]),
+                          Icon(Icons.check_circle, color: Colors.teal[300]),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               objectives[index],
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ],

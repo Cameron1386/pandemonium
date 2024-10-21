@@ -6,16 +6,16 @@ class SetupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[50],
-      body: const SafeArea(
+      backgroundColor: const Color(0xFF0D1B2A), // Dark theme background color
+      body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               SizedBox(height: 20),
               Text(
                 "Welcome to Cybersecurity!",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               SizedBox(height: 10),
               Padding(
@@ -23,7 +23,7 @@ class SetupPage extends StatelessWidget {
                 child: Text(
                   "Hi folks! I'm Harry, and I'll be your guide through the digital world of cybersecurity.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
               SizedBox(height: 20),
