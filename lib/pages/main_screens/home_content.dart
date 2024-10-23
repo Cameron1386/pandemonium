@@ -198,7 +198,8 @@ class _InnerHomeContent extends StatelessWidget {
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
+                centerTitle: true,
+                title: const Text(
                 "Pandemonium!",
                 style: TextStyle(
                   color: Colors.white,
@@ -237,7 +238,7 @@ class _InnerHomeContent extends StatelessWidget {
                   context,
                   'Daily Level',
                   'Complete a new challenge each day!',
-                  'lib/images/panda.png',
+                  'lib/images/magicstudio-art.jpg',
                   Colors.teal,
                   () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DailyLevel())),
                 ),
