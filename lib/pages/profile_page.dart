@@ -71,13 +71,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     _buildProfileHeader(context),
                     const SizedBox(height: 30),
-                    _buildProfileDetail("Username", userData!['username'], Icons.person),
+                    _buildProfileDetail("Username", userData!['username'] ?? 'N/A', Icons.person),
                     const SizedBox(height: 20),
                     _buildProfileDetail("Email", user.email ?? 'No email', Icons.email),
                     const SizedBox(height: 20),
-                    _buildProfileDetail("Score", userData!['score'].toString(), Icons.star),
+                    _buildProfileDetail("Score", userData!['score']?.toString() ?? 'N/A', Icons.star),
                     const SizedBox(height: 20),
-                    _buildProfileDetail("Total Streaks", userData!['totalStreaks'].toString(), Icons.whatshot),
+                    _buildProfileDetail(
+                      "Total Streaks",
+                      userData!['totalStreaks']?.toString() ?? '0', // Fallback to '0' if null
+                      Icons.whatshot,
+                    ),
                     const SizedBox(height: 20),
                     _buildProfileDetail("Leaderboard Position", leaderboardPosition.toString(), Icons.leaderboard),
                     const SizedBox(height: 40),
