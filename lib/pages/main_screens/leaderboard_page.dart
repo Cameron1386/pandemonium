@@ -43,12 +43,18 @@ class LeaderboardPage extends StatelessWidget {
               ],
             ),
           ),
-          body: TabBarView(
+          body: Column(
             children: [
-              // Regional Leaderboard
-              _themedLeaderboardContent(RegionalPage()),
-              // Global Leaderboard
-              _themedLeaderboardContent(GlobalPage()),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    // Regional Leaderboard
+                    _themedLeaderboardContent(RegionalPage()),
+                    // Global Leaderboard
+                    _themedLeaderboardContent(GlobalPage()),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

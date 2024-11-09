@@ -128,7 +128,6 @@ class _GlobalPageState extends State<GlobalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
@@ -152,13 +151,16 @@ class _GlobalPageState extends State<GlobalPage> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          return Column(
-            children: [
-              SizedBox(height: 20),
-              _buildTop3(userDocs), // Top 3 users displayed differently
-              Divider(),
-              Expanded(child: _buildLeaderboardList(userDocs)), // Rest of the users
-            ],
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 20),
+                _buildTop3(userDocs), // Top 3 users displayed differently
+                Divider(),
+                _buildLeaderboardList(userDocs), // Rest of the users
+              ],
+            ),
           );
         },
       ),
